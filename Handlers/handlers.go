@@ -5,6 +5,7 @@ import (
 	"cashmachine/Utils"
 	"encoding/json"
 	"net/http"
+	"strconv"
 )
 
 type RespCashState struct {
@@ -19,7 +20,7 @@ type RespTransactionState struct {
 }
 
 type ReqDebit struct {
-	Sum uint `json:"sum"`
+	Sum string `json:"sum"`
 }
 
 func MainPage(w http.ResponseWriter, r *http.Request) {
@@ -31,9 +32,15 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cashinfo, err := utils.Calculate(input.Sum)
+	sum, err := strconv.Atoi(input.Sum)
+	if err != nil || sum < 0 {
+		http.Error(w, "error bad input 2", http.StatusBadRequest)
+		return
+	}
+
+	cashinfo, err := utils.Calculate(uint(sum))
 	if err != nil {
-		http.Error(w, "error bad input 2", http.StatusConflict)
+		http.Error(w, "error bad input 3", http.StatusConflict)
 		return
 	}
 
