@@ -33,7 +33,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 
 	cashinfo, err := utils.Calculate(input.Sum)
 	if err != nil {
-		http.Error(w, "error bad input 2", http.StatusBadRequest)
+		http.Error(w, "error bad input 2", http.StatusConflict)
 		return
 	}
 
