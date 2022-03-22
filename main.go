@@ -32,7 +32,7 @@ func main() {
 
 	api.Use(CorsMiddleware)
 
-	api.HandleFunc("/mainpage", handlers.MainPage).Methods("POST", "OPTIONS")
+	api.HandleFunc("/mainpage", handlers.MainPage)
 
 	port := os.Getenv("PORT") // to get port from Heroku
 	if port == "" {
