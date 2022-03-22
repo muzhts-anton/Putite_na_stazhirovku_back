@@ -27,13 +27,13 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 	var input ReqDebit
 	err := json.NewDecoder(r.Body).Decode(&input)
 	if err != nil {
-		http.Error(w, "error bad input", http.StatusBadRequest)
+		http.Error(w, "error bad input 1", http.StatusBadRequest)
 		return
 	}
 
 	cashinfo, err := utils.Calculate(input.Sum)
 	if err != nil {
-		http.Error(w, "error bad input", http.StatusBadRequest)
+		http.Error(w, "error bad input 2", http.StatusBadRequest)
 		return
 	}
 
